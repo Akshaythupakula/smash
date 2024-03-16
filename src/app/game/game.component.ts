@@ -24,7 +24,7 @@ export class GameComponent implements OnInit {
   text = ''
   heatlth = 100
   message = 0
-  take = 1200
+  take = 20
   colr: string[] = ['blue', 'black', 'red']
   constructor() {
     this.subscription = new Subscription(); // Initialize the property in the constructor
@@ -70,10 +70,13 @@ export class GameComponent implements OnInit {
   smash(event: string) {
     if (event == 'blue') {
       this.message = this.message + 10
+      this.take=this.heatlth
 
     } else if (event != 'blue') {
       this.message = this.message - 10
       this.heatlth = this.heatlth - 10
+      this.take=this.heatlth
+
     }
     else if (this.heatlth < 1) {
       this.message = this.message
