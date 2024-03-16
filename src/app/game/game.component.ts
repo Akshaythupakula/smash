@@ -41,7 +41,7 @@ export class GameComponent implements OnInit {
   }
 
   ngOnDestroy(): void {
-    if (this.subscription) {
+    if (this.subscription && this.heatlth<1) {
       this.subscription.unsubscribe(); // Clean up subscription when component is destroyed
     }
   }
