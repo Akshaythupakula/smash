@@ -22,7 +22,9 @@ export class GameComponent implements OnInit {
   colors8=''
   colors9=''
   text=''
+  heatlth=100
   message=0
+  take=1000
   colr:string[]=['blue','black','red']
   constructor() {
     this.subscription = new Subscription(); // Initialize the property in the constructor
@@ -31,7 +33,7 @@ export class GameComponent implements OnInit {
   ngOnInit(): void {
     this.subscription = interval(1000) // 3000 milliseconds = 3 seconds
       .pipe(
-        take(100) // Run the function 10 times (for demonstration purposes)
+        take(this.take) // Run the function 10 times (for demonstration purposes)
       )
       .subscribe(() => {
         this.myFunction(); // Call your function here
@@ -57,14 +59,23 @@ export class GameComponent implements OnInit {
 
 
     this.text=this.colr[text]
+    if(this.message==0 && this.heatlth==0){
+      this.take=0
+      this.colors1='white'
+    this.colors2='white'
+    this.colors3='white'
+
+    }
   }
   smash(event:string){
     if(event=='blue'){
       this.message=this.message+10
       console.log(event)
+      this.take=this.take+10
 
     }else if(event!='blue'){
       this.message=this.message-10
+      this.heatlth=this.heatlth-10
     }
     console.log(event)
   }
