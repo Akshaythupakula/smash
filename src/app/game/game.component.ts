@@ -57,8 +57,8 @@ export class GameComponent implements OnInit {
     this.colors3 = this.colr[c3]
 
 
-    
-    if ( this.heatlth < 1) {
+
+    if (this.heatlth < 1) {
       this.take = 0
       this.colors1 = 'white'
       this.colors2 = 'white'
@@ -70,16 +70,14 @@ export class GameComponent implements OnInit {
   smash(event: string) {
     if (event == 'blue') {
       this.message = this.message + 10
-      console.log(event)
 
     } else if (event != 'blue') {
       this.message = this.message - 10
       this.heatlth = this.heatlth - 10
     }
-    else if(this.heatlth<1){
-      this.message=this.message
-      
+    else if (this.heatlth < 1) {
+      this.message = this.message
+
     }
-    console.log(event)
   }
 }
