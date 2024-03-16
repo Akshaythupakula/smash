@@ -76,6 +76,10 @@ export class GameComponent implements OnInit {
       this.message = this.message - 10
       this.heatlth = this.heatlth - 10
     }
+    else if(this.heatlth<1){
+      this.message=this.message
+      
+    }
     console.log(event)
   }
 }
