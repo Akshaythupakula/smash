@@ -1,0 +1,17 @@
+.container{
+    background-color: aquamarine;
+    text-align: center;
+
+    justify-content: center; /* Horizontal centering */
+    align-items: center; /* Vertical centering */
+    border: 1px solid #ccc;
+    #start{
+        cursor: pointer;
+
+
+    }
+ 
+    #quit{
+        cursor: pointer;
+    }
+}
