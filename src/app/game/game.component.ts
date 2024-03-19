@@ -22,11 +22,11 @@ export class GameComponent implements OnInit {
   colors8 = ''
   colors9 = ''
   text = ''
-  heatlth = 10
+  heatlth = 100
   message = 0
-  take=10
+  take=1000
   
-  colr: string[] = ['blue', 'black', 'red','white','white','white','white','white','white',]
+  colr: string[] = ['./../../assets/duck.webp', './../../assets/duck.webp', './../../assets/duck.webp','./../../assets/duck.webp','./../../assets/download.jpeg','./../../assets/download.jpeg','./../../assets/download.jpeg','./../../assets/download.jpeg','./../../assets/download.jpeg',]
   constructor() {
     this.subscription = new Subscription(); // Initialize the property in the constructor
   }
@@ -77,20 +77,26 @@ export class GameComponent implements OnInit {
  
   }
   smash(event: string) {
-    if (event == 'blue'&& this.heatlth >1) {
+    if (event == './../../assets/duck.webp'&& this.heatlth >0) {
       this.message = this.message + 10
 
 
-    } else if (event != 'blue'&& this.heatlth > 1) {
+    } else if (event != './../../assets/duck.webp'&& this.heatlth > 0) {
       this.message = this.message - 10
       this.heatlth = this.heatlth - 1
 
     }
-    else if(this.heatlth < 1){
+    else if(this.heatlth == 0){
       this.message = this.message
-      this.colors1 = 'white'
-      this.colors2 = 'white'
-      this.colors3 = 'white'
+      this.colors1 = './../../assets/game-with-glitch-effect_225004-661.avif'
+      this.colors2 = './../../assets/game-with-glitch-effect_225004-661.avif'
+      this.colors3 = './../../assets/game-with-glitch-effect_225004-661.avif'
+      this.colors4 = './../../assets/game-with-glitch-effect_225004-661.avif'
+      this.colors5 = './../../assets/game-with-glitch-effect_225004-661.avif'
+      this.colors6 = './../../assets/game-with-glitch-effect_225004-661.avif'
+      this.colors7 = './../../assets/game-with-glitch-effect_225004-661.avif'
+      this.colors8 = './../../assets/game-with-glitch-effect_225004-661.avif'
+      this.colors9 = './../../assets/game-with-glitch-effect_225004-661.avif'
       this.text = 'game over'
       this.take=this.heatlth
 
