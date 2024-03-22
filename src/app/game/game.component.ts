@@ -8,33 +8,44 @@ import { CommonModule } from '@angular/common';
   standalone: true,
   imports: [CommonModule],
   templateUrl: './game.component.html',
-  styleUrl: './game.component.scss'
+  styleUrls: ['./game.component.scss']
 })
 export class GameComponent implements OnInit {
   private subscription: Subscription;
-  colors1 = ''
-  colors2 = ''
-  colors3 = ''
-  colors4 = ''
-  colors5 = ''
-  colors6 = ''
-  colors7 = ''
-  colors8 = ''
-  colors9 = ''
-  text = ''
-  heatlth = 100
-  message = 0
-  take=1000
-  
-  colr: string[] = ['./../../assets/duck.webp', './../../assets/duck.webp', './../../assets/duck.webp','./../../assets/duck.webp','./../../assets/download.jpeg','./../../assets/download.jpeg','./../../assets/download.jpeg','./../../assets/download.jpeg','./../../assets/download.jpeg',]
+  colors1 = '';
+  colors2 = '';
+  colors3 = '';
+  colors4 = '';
+  colors5 = '';
+  colors6 = '';
+  colors7 = '';
+  colors8 = '';
+  colors9 = '';
+  text = '';
+  health = 100;
+  message = 0;
+  take = this.health; // Initialize take with health
+
+  colr: string[] = [
+    './../../assets/duck.webp',
+    './../../assets/duck.webp',
+    './../../assets/duck.webp',
+    './../../assets/duck.webp',
+    './../../assets/download.jpeg',
+    './../../assets/download.jpeg',
+    './../../assets/download.jpeg',
+    './../../assets/download.jpeg',
+    './../../assets/download.jpeg'
+  ];
+
   constructor() {
     this.subscription = new Subscription(); // Initialize the property in the constructor
   }
 
   ngOnInit(): void {
-    this.subscription = interval(3000) 
+    this.subscription = interval(3000)
       .pipe(
-        take(this.take) 
+        take(this.take)
       )
       .subscribe(() => {
         this.myFunction(); // Call your function here
@@ -47,11 +58,7 @@ export class GameComponent implements OnInit {
     }
   }
 
-
-
-
   myFunction(): void {
-
     const randomIndex = Math.floor(Math.random() * this.colr.length);
     const c2 = Math.floor(Math.random() * this.colr.length);
     const c3 = Math.floor(Math.random() * this.colr.length);
@@ -62,46 +69,37 @@ export class GameComponent implements OnInit {
     const c8 = Math.floor(Math.random() * this.colr.length);
     const c9 = Math.floor(Math.random() * this.colr.length);
 
-    this.colors1 = this.colr[randomIndex]
-    this.colors2 = this.colr[c2]
-    this.colors3 = this.colr[c3]
-    this.colors4 = this.colr[c4]
-    this.colors5 = this.colr[c5]
-    this.colors6 = this.colr[c6]
-    this.colors7 = this.colr[c7]
-    this.colors8 = this.colr[c8]
-    this.colors9 = this.colr[c9]
-
-
-
- 
+    this.colors1 = this.colr[randomIndex];
+    this.colors2 = this.colr[c2];
+    this.colors3 = this.colr[c3];
+    this.colors4 = this.colr[c4];
+    this.colors5 = this.colr[c5];
+    this.colors6 = this.colr[c6];
+    this.colors7 = this.colr[c7];
+    this.colors8 = this.colr[c8];
+    this.colors9 = this.colr[c9];
   }
-  smash(event: string) {
-    if (event == './../../assets/duck.webp'&& this.heatlth >0) {
-      this.message = this.message + 10
 
-
-    } else if (event != './../../assets/duck.webp'&& this.heatlth > 0) {
-      this.message = this.message - 10
-      this.heatlth = this.heatlth - 1
-
-    }
-    else if(this.heatlth == 0){
-      this.message = this.message
-      this.colors1 = './../../assets/game-with-glitch-effect_225004-661.avif'
-      this.colors2 = './../../assets/game-with-glitch-effect_225004-661.avif'
-      this.colors3 = './../../assets/game-with-glitch-effect_225004-661.avif'
-      this.colors4 = './../../assets/game-with-glitch-effect_225004-661.avif'
-      this.colors5 = './../../assets/game-with-glitch-effect_225004-661.avif'
-      this.colors6 = './../../assets/game-with-glitch-effect_225004-661.avif'
-      this.colors7 = './../../assets/game-with-glitch-effect_225004-661.avif'
-      this.colors8 = './../../assets/game-with-glitch-effect_225004-661.avif'
-      this.colors9 = './../../assets/game-with-glitch-effect_225004-661.avif'
-      this.text = 'game over'
-      this.take=this.heatlth
-
-      // this.subscription.unsubscribe();
-
+  smash(event: string): void {
+    if (event == './../../assets/duck.webp' && this.health > 0) {
+      this.message += 10;
+    } else if (event != './../../assets/duck.webp' && this.health > 0) {
+      this.message -= 10;
+      this.health -= 1;
+    } else if (this.health === 0) {
+      this.message = this.message;
+      this.colors1 = './../../assets/game-with-glitch-effect_225004-661.avif';
+      this.colors2 = './../../assets/game-with-glitch-effect_225004-661.avif';
+      this.colors3 = './../../assets/game-with-glitch-effect_225004-661.avif';
+      this.colors4 = './../../assets/game-with-glitch-effect_225004-661.avif';
+      this.colors5 = './../../assets/game-with-glitch-effect_225004-661.avif';
+      this.colors6 = './../../assets/game-with-glitch-effect_225004-661.avif';
+      this.colors7 = './../../assets/game-with-glitch-effect_225004-661.avif';
+      this.colors8 = './../../assets/game-with-glitch-effect_225004-661.avif';
+      this.colors9 = './../../assets/game-with-glitch-effect_225004-661.avif';
+      this.text = 'game over';
+      this.take = this.health;
+      this.subscription.unsubscribe();
     }
   }
 }
