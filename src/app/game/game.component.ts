@@ -85,7 +85,7 @@ export class GameComponent implements OnInit {
       this.message += 10;
     } else if (event != './../../assets/duck.webp' && this.health > 0) {
       this.message -= 10;
-      this.health -= 1;
+      this.health -= 10;
     } else if (this.health === 0) {
       this.message = this.message;
       this.colors1 = './../../assets/game-with-glitch-effect_225004-661.avif';
