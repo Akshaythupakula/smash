@@ -136,12 +136,15 @@ button {
 }
 
 @media screen and (max-width:475px) {
+  .container{
+    height:800px;
+  }
   .col-sm-4 {
 
 
     width: 110px;
     height: 170px;
-    left: 10%;
+    left: 4%;
     padding: 2px;
     margin: 2px;
     background-size: 20px 170px;

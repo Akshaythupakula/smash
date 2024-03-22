@@ -23,7 +23,7 @@ export class GameComponent implements OnInit {
   });
   private background = new Howl({
     src: ['./../../assets/a-space-journey-through-the-solar-system-153272.mp3'],
-    volume: 0.5,
+    volume: 0.2,
     loop: true // Path to your sound file
   });
   private button = new Howl({
