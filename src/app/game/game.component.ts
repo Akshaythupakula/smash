@@ -104,7 +104,7 @@ export class GameComponent implements OnInit {
   }
 
   smash(event: string): void {
-    if (event == './../../assets/energy-removebg-preview.png') {
+    if (event == './../../assets/energy-removebg-preview.png'&& this.health > 0) {
       this.health += 10;
     }
     if (event == './../../assets/pig-rosa-pig-amiga-pig-correndo.gif' && this.health > 0) {
