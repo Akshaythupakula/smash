@@ -24,7 +24,7 @@ export class GameComponent implements OnInit {
   text = '';
   health = 100;
   message = 0;
-  take = this.health; // Initialize take with health
+  take = this.health+this.message; // Initialize take with health
 
   colr: string[] = [
     './../../assets/duck.webp',
@@ -43,7 +43,7 @@ export class GameComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.subscription = interval(3000)
+    this.subscription = interval(1000)
       .pipe(
         take(this.take)
       )
@@ -85,7 +85,7 @@ export class GameComponent implements OnInit {
       this.message += 10;
     } else if (event != './../../assets/duck.webp' && this.health > 0) {
       this.message -= 10;
-      this.health -= 10;
+      this.health -= 1;
     } else if (this.health === 0) {
       this.message = this.message;
       this.colors1 = './../../assets/game-with-glitch-effect_225004-661.avif';
