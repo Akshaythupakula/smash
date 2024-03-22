@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { interval, Subscription } from 'rxjs';
 import { take } from 'rxjs/operators';
-import { CommonModule } from '@angular/common';
+import { CommonModule, DOCUMENT } from '@angular/common';
+import { Howl } from 'howler';
+import { Injectable, Inject } from '@angular/core';
 
 @Component({
   selector: 'app-game',
@@ -10,8 +12,23 @@ import { CommonModule } from '@angular/common';
   templateUrl: './game.component.html',
   styleUrls: ['./game.component.scss']
 })
+@Injectable({ providedIn: 'root' })
 export class GameComponent implements OnInit {
   private subscription: Subscription;
+  private sound = new Howl({
+    src: ['./../../assets/hq-explosion-6288.mp3'] // Path to your sound file
+  });
+  private sound1 = new Howl({
+    src: ['./../../assets/080190_pig-86603.mp3'] // Path to your sound file
+  });
+  private background = new Howl({
+    src: ['./../../assets/a-space-journey-through-the-solar-system-153272.mp3'],
+    volume: 0.5,
+    loop: true // Path to your sound file
+  });
+  private button = new Howl({
+    src: ['./../../assets/click.wav'] // Path to your sound file
+  });
   colors1 = '';
   colors2 = '';
   colors3 = '';
@@ -24,26 +41,30 @@ export class GameComponent implements OnInit {
   text = '';
   health = 100;
   message = 0;
+  change = 0
   take = this.health+this.message; // Initialize take with health
+  // take = 1
+
+
 
   colr: string[] = [
-    './../../assets/duck.webp',
-    './../../assets/duck.webp',
-    './../../assets/duck.webp',
-    './../../assets/duck.webp',
-    './../../assets/download.jpeg',
-    './../../assets/download.jpeg',
-    './../../assets/download.jpeg',
-    './../../assets/download.jpeg',
-    './../../assets/download.jpeg'
+    './../../assets/pig-rosa-pig-amiga-pig-correndo.gif',
+    './../../assets/pig-rosa-pig-amiga-pig-correndo.gif',
+    './../../assets/energy-removebg-preview.png',
+    './../../assets/energy-removebg-preview.png',
+    './../../assets/download-removebg-preview.png',
+    './../../assets/download-removebg-preview.png',
+    './../../assets/download-removebg-preview.png',
+    './../../assets/download-removebg-preview.png',
+    './../../assets/download-removebg-preview.png'
   ];
 
-  constructor() {
+  constructor(@Inject(DOCUMENT) private document: Document) {
     this.subscription = new Subscription(); // Initialize the property in the constructor
   }
 
   ngOnInit(): void {
-    this.subscription = interval(1000)
+    this.subscription = interval(1500)
       .pipe(
         take(this.take)
       )
@@ -78,15 +99,36 @@ export class GameComponent implements OnInit {
     this.colors7 = this.colr[c7];
     this.colors8 = this.colr[c8];
     this.colors9 = this.colr[c9];
+    this.background.play();
+
   }
 
   smash(event: string): void {
-    if (event == './../../assets/duck.webp' && this.health > 0) {
+    if (event == './../../assets/energy-removebg-preview.png') {
+      this.health += 10;
+    }
+    if (event == './../../assets/pig-rosa-pig-amiga-pig-correndo.gif' && this.health > 0) {
       this.message += 10;
-    } else if (event != './../../assets/duck.webp' && this.health > 0) {
+      this.sound1.play();
+    } else if (event != './../../assets/pig-rosa-pig-amiga-pig-correndo.gif' && './../../assets/energy-removebg-preview.png' && this.health > 0) {
       this.message -= 10;
-      this.health -= 10;
-    } else if (this.health === 0) {
+
+      this.health -= 30;
+      this.colors1 = './../../assets/explode-explosion.gif'
+      this.colors2 = './../../assets/explode-explosion.gif'
+      this.colors3 = './../../assets/explode-explosion.gif'
+      this.colors4 = './../../assets/explode-explosion.gif'
+      this.colors5 = './../../assets/explode-explosion.gif'
+      this.colors6 = './../../assets/explode-explosion.gif'
+      this.colors7 = './../../assets/explode-explosion.gif'
+      this.colors8 = './../../assets/explode-explosion.gif'
+      this.colors9 = './../../assets/explode-explosion.gif'
+      this.sound.play();
+
+
+
+
+    } else if (this.health <= 0) {
       this.message = this.message;
       this.colors1 = './../../assets/game-with-glitch-effect_225004-661.avif';
       this.colors2 = './../../assets/game-with-glitch-effect_225004-661.avif';
@@ -99,7 +141,14 @@ export class GameComponent implements OnInit {
       this.colors9 = './../../assets/game-with-glitch-effect_225004-661.avif';
       this.text = 'game over';
       this.take = this.health;
+      this.background.stop();
       this.subscription.unsubscribe();
     }
   }
+  reloadPage() {
+    this.document.location.reload();
+    this.button.play();
+
+  }
+
 }
