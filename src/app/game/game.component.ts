@@ -42,8 +42,7 @@ export class GameComponent implements OnInit {
   message = 0;
   change = 0
   score = 0
-  // take = this.health+this.message; // Initialize take with health
-  take = 100
+  take = this.health+this.message; // Initialize take with health
 
 
 
@@ -64,17 +63,12 @@ export class GameComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.subscription = interval(1500)
-      .pipe(
-        take(this.take)
-      )
-      .subscribe(() => {
-        this.myFunction(); // Call your function here
-      });
+
     const storedItem = localStorage.getItem('myData');
     if (storedItem) {
       this.score = JSON.parse(storedItem);
     }
+    this.start()
   }
 
   ngOnDestroy(): void {
@@ -83,6 +77,15 @@ export class GameComponent implements OnInit {
     }
   }
 
+  start() {
+    this.subscription = interval(1000)
+      .pipe(
+        take(this.take + this.health + this.message)
+      )
+      .subscribe(() => {
+        this.myFunction(); // Call your function here
+      });
+  }
   myFunction(): void {
     const randomIndex = Math.floor(Math.random() * this.colr.length);
     const c2 = Math.floor(Math.random() * this.colr.length);
