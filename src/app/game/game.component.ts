@@ -1,9 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Injectable, Inject } from '@angular/core';
 import { interval, Subscription } from 'rxjs';
 import { take } from 'rxjs/operators';
 import { CommonModule, DOCUMENT } from '@angular/common';
 import { Howl } from 'howler';
-import { Injectable, Inject } from '@angular/core';
 
 @Component({
   selector: 'app-game',
@@ -42,8 +41,9 @@ export class GameComponent implements OnInit {
   health = 100;
   message = 0;
   change = 0
-  take = this.health+this.message; // Initialize take with health
-  // take = 1
+  score = 0
+  // take = this.health+this.message; // Initialize take with health
+  take = 100
 
 
 
@@ -71,6 +71,10 @@ export class GameComponent implements OnInit {
       .subscribe(() => {
         this.myFunction(); // Call your function here
       });
+    const storedItem = localStorage.getItem('myData');
+    if (storedItem) {
+      this.score = JSON.parse(storedItem);
+    }
   }
 
   ngOnDestroy(): void {
@@ -100,11 +104,12 @@ export class GameComponent implements OnInit {
     this.colors8 = this.colr[c8];
     this.colors9 = this.colr[c9];
     this.background.play();
+    this.take = this.message
 
   }
 
   smash(event: string): void {
-    if (event == './../../assets/energy-removebg-preview.png'&& this.health > 0) {
+    if (event == './../../assets/energy-removebg-preview.png' && this.health > 0) {
       this.health += 10;
     }
     if (event == './../../assets/pig-rosa-pig-amiga-pig-correndo.gif' && this.health > 0) {
@@ -140,10 +145,18 @@ export class GameComponent implements OnInit {
       this.colors8 = './../../assets/game-with-glitch-effect_225004-661.avif';
       this.colors9 = './../../assets/game-with-glitch-effect_225004-661.avif';
       this.text = 'game over';
-      this.take = this.health;
+
+      this.take = 0
       this.background.stop();
       this.subscription.unsubscribe();
     }
+    if (this.score < this.message) {
+      let dataToStore = 0
+      dataToStore = this.message;
+      localStorage.setItem('myData', dataToStore.toString());
+      this.score = this.message
+    }
+
   }
   reloadPage() {
     this.document.location.reload();

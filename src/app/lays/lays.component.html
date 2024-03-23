@@ -1,16 +1,29 @@
 <div class="row">
-  <div class="col-sm-4"></div>
+  <div class="col-sm-4">
+
+
+
+  </div>
 
   <div class="col-sm-4">
     <div class="container">
       <div>
-        <a href="/game">
-          <button class="button-55" role="button" (click)="start()" id="start">Start</button>
+        <a href="/game" *ngIf="!view">
+          <button class="button-55" role="button" (click)="start()" id="start" >Start</button>
+        </a>
+        <a href="/game" *ngIf="view">
+          <button class="button-55" role="button" (click)="start()" id="start" >click Me</button>
         </a>
       </div>
-      <hr>
-      <button class="button-55" role="button" (click)="start()" id="start">How to play</button>
 
+      <button class="button-55" role="button" (click)="list()" id="how" *ngIf="!view">How to play</button>
+      <a href="">
+        <button class="button-55" role="button" (click)="list()" id="how" *ngIf="!view">about me</button>
+
+      </a>
+
+
+   
     </div>
   </div>
   <div class="col-sm-4"></div>

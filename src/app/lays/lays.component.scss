@@ -2,7 +2,7 @@
     position: fixed;
     width: 393px;
     height: 700px;
-    display: flex;
+    // display: flex;
     justify-content: center;
     align-items: center;
 
@@ -22,7 +22,11 @@
     }
 }
 
+
 #start {
+    margin-top: 200px;
+    margin-left: 150px;
+    margin-bottom: 20px;
     color: #000;
     animation: dropWords 2s ease-in-out 1;
 }
@@ -87,6 +91,10 @@
 #start {
     animation: burn 2.5s linear infinite alternate;
     // animation: dropWords  2s ease-in-out 1;
+}
+#how{
+    animation: burn 2.5s linear infinite alternate;
+    margin-left: 40px;
 }
 
 @keyframes burn {
