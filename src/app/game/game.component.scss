@@ -12,7 +12,28 @@
     transform: translateY(0);
   }
 }
+@keyframes spaceAnimation {
+  0% {
+      background-position: 0% 0%;
+  }
 
+  100% {
+      background-position: 100% 100%;
+  }
+}
+.level{
+
+  width: 393px;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background-image: url('./../../assets/istockphoto-1295202272-612x612.jpg');
+    background-size: cover;
+    background-position: center;
+    animation: spaceAnimation 30s linear infinite;
+}
 // SCSS mixin for animation
 @mixin floatingAnimation($duration: 2s, $timing-function: ease) {
   animation: floatAnimation $duration $timing-function infinite;

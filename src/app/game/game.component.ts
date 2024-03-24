@@ -42,10 +42,10 @@ export class GameComponent implements OnInit {
   message = 0;
   change = 0
   score = 0
-  take = this.health+this.message; // Initialize take with health
+  take = this.health + this.message; // Initialize take with health
 
-
-
+  time = 0
+  gameplay = 'false'
   colr: string[] = [
     './../../assets/pig-rosa-pig-amiga-pig-correndo.gif',
     './../../assets/pig-rosa-pig-amiga-pig-correndo.gif',
@@ -68,7 +68,7 @@ export class GameComponent implements OnInit {
     if (storedItem) {
       this.score = JSON.parse(storedItem);
     }
-    this.start()
+
   }
 
   ngOnDestroy(): void {
@@ -76,9 +76,18 @@ export class GameComponent implements OnInit {
       this.subscription.unsubscribe(); // Clean up subscription when component is destroyed
     }
   }
+  level(value: number) {
+    this.start()
+    console.log(value)
+
+    this.gameplay = 'true'
+    { value == 1 ? this.time = 1700 : value == 2 ? this.time = 1300 : value == 3 ? this.time = 1000 : this.time = 0 }
+    console.log(this.time)
+    { this.time > 0 ? this.start() : console.log("choose") }
+  }
 
   start() {
-    this.subscription = interval(1000)
+    this.subscription = interval(this.time)
       .pipe(
         take(this.take + this.health + this.message)
       )
